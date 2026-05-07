@@ -1,0 +1,232 @@
+/* --- БАЗОВІ ТА СПІЛЬНІ СТИЛІ --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Стандартний фон для всіх сторінок */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("fashion.1.png") no-repeat center center/cover;
+    opacity: 0.6;
+    z-index: -1;
+}
+
+/* ЗАСТАВКА ДЛЯ 3-Ї СТОРІНКИ (КОШИК) */
+body.cart-page::before {
+    background: url("ds.jpeg") no-repeat center center/cover;
+    opacity: 0.7;
+}
+
+/* ЗАСТАВКА ДЛЯ 4-Ї СТОРІНКИ (РОЗМІРИ) */
+body.sizes-page::before {
+    background: url("IMG_9760.jpg") no-repeat center center/cover;
+    filter: brightness(0.6);
+    opacity: 1;
+}
+
+header {
+    background: rgba(255, 192, 203, 0.9);
+    text-align: center;
+    padding: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    background: rgba(255, 192, 203, 0.8);
+    padding: 10px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    background: #ff69b4;
+    color: white;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* --- ПЕРША СТОРІНКА (INDEX) --- */
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+.text { width: 60%; }
+.image { width: 35%; }
+.image img { width: 100%; border-radius: 15px; }
+.login { margin-top: 30px; }
+input { padding: 10px; margin: 5px; border-radius: 8px; border: 1px solid #ccc; }
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    background: #ff69b4;
+    color: white;
+    cursor: pointer;
+}
+button:hover { background: #ff1493; }
+
+.delivery, .contacts { margin-top: 20px; }
+.delivery-content, .contacts-content {
+    display: none;
+    margin-top: 15px;
+    padding: 15px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.delivery-item, .contact-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 10px;
+    background: #ffe4ec;
+    border-radius: 10px;
+}
+.delivery-item img { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; }
+
+/* --- СТОРІНКА КАТАЛОГУ (CATALOG) --- */
+.slider { width: 100%; height: 300px; overflow: hidden; margin-bottom: 20px; }
+.slides { display: flex; width: 200%; animation: slide 30s linear infinite; }
+.slides img { width: 100%; height: 300px; object-fit: cover; }
+@keyframes slide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.filters {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 20px 0;
+    padding: 15px;
+    background: white;
+    border-radius: 12px;
+}
+.filters input, .filters select { 
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ff69b4; 
+    border-radius: 8px;
+}
+
+.products { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+.product {
+    width: 220px;
+    background: white;
+    border-radius: 15px;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+.product:hover { transform: translateY(-8px); }
+.product img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; }
+.product h3 { color: #c71585; margin: 10px 0; }
+.product .price { font-weight: bold; color: #e91e63; }
+
+/* --- СТОРІНКА КОШИКА (CART) --- */
+.item { 
+    display: flex; 
+    justify-content: space-between; 
+    padding: 15px; 
+    background: #fff0f5; 
+    margin: 10px 0; 
+    border-radius: 10px; 
+    border: 1px solid #ffe4e1;
+    align-items: center;
+}
+#total { margin: 20px 0; color: #ff1493; font-size: 22px; text-align: right; font-weight: bold; }
+#clearCartBtn { background: #999; color: white; }
+.radio-box { background: #fff0f5; padding: 15px; border-radius: 10px; margin-top: 10px; }
+.review { 
+    background: white; 
+    margin: 10px 0; 
+    padding: 15px; 
+    border-radius: 10px; 
+    border-left: 5px solid pink;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* --- СТОРІНКА РОЗМІРІВ (SIZES) --- */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+}
+th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+th {
+    background: #ff69b4;
+    color: white;
+}
+tr:hover td {
+    background-color: #fff0f5;
+}
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* СПІЛЬНІ ЕЛЕМЕНТИ ФОРМ */
+hr { border: 0; height: 1px; background: #ffe4e1; margin: 30px 0; }
+label { display: block; margin: 10px 0 5px; color: #333; font-weight: bold; }
+
+select, #formBlock input[type="text"], #formBlock input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+/* --- FOOTER --- */
+footer { background: #222; color: white; text-align: center; padding: 15px; margin-top: 40px; border-radius: 0 0 15px 15px; }

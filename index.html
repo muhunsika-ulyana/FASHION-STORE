@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Fashion Store</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+    function toggleDelivery(){
+        let block = document.getElementById("deliveryText");
+        block.style.display = (block.style.display === "block") ? "none" : "block";
+    }
+
+    function toggleContacts(){
+        let block = document.getElementById("contactsText");
+        block.style.display = (block.style.display === "block") ? "none" : "block";
+    }
+
+    function login(){
+        let login = document.querySelector('input[type="text"]').value;
+        let password = document.querySelector('input[type="password"]').value;
+
+        if(login && password){
+            window.location.href = "catalog.html";
+        } else {
+            alert("Введіть логін і пароль!");
+        }
+    }
+    </script>
+</head>
+
+<body>
+
+<header>
+    FASHION STORE
+</header>
+
+<nav class="menu">
+    <a href="index.html">Головна</a>
+    <a href="catalog.html">Каталог</a>
+    <a href="cart.html">Кошик</a>
+    <a href="sizes.html">Розміри</a>
+</nav>
+
+<div class="container">
+
+    <div class="content">
+        <div class="text">
+            <h2>Ласкаво просимо!</h2>
+            <p>
+                Fashion Store — місця, де стиль поєднується з комфортом! 
+                У нашому магазині ви знайдете сучасний одяг для будь-якого випадку: від повсякденних образів до елегантних нарядів. 
+                Ми пропонуємо якісні матеріали, актуальні тренди та доступні ціни, щоб кожен міг виглядати впевнено і стильно щодня.
+            </p>
+
+            <p>
+                📍 м. Львів, ТРЦ Forum Lviv, вул. Під Дубом, 7Б  
+            </p>
+            <p>
+                🕒 Працюємо: 10:00 – 21:00
+            </p>
+        </div>
+
+        <div class="image">
+            <img src="usa-shop.png" alt="Магазин">
+        </div>
+    </div>
+
+    <div class="login">
+        <h3>Вхід / Реєстрація</h3>
+        <input type="text" placeholder="Логін">
+        <input type="password" placeholder="Пароль">
+        <button onclick="login()">Увійти</button>
+    </div>
+
+    <div class="delivery">
+        <button onclick="toggleDelivery()">Доставка</button>
+
+        <div id="deliveryText" class="delivery-content">
+            <p>🚚 Варіанти доставки:</p>
+            <p>Накладний платіж або повна оплата на сайті</p>
+
+            <div class="delivery-item">
+                <p>📦 Нова Пошта: доставка 1–2 робочі дні</p>
+                <img src="IMG_9761.jpeg" alt="Нова Пошта">
+            </div>
+
+            <div class="delivery-item">
+                <p>📮 Укрпошта: доставка 3–4 робочі дні</p>
+                <img src="IMG_9762.jpeg" alt="Укрпошта">
+            </div>
+        </div>
+    </div>
+
+    <div class="contacts">
+        <button onclick="toggleContacts()">Контакти</button>
+
+        <div id="contactsText" class="contacts-content">
+            <div class="contact-item">📧 Email: fashionstore@gmail.com</div>
+            <div class="contact-item">📞 Телефон: +380 00 000 00 00</div>
+            <div class="contact-item">📷 Instagram: @fashion_store</div>
+            <div class="contact-item">💬 Telegram: @fashionstore</div>
+            <div class="contact-item">📱 Viber: +380 00 000 00 00</div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

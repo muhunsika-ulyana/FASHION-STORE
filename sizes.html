@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Розмірна сітка - Fashion Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="sizes-page">
+
+<header>
+    FASHION STORE
+</header>
+
+<nav class="menu">
+    <a href="index.html">Головна</a>
+    <a href="catalog.html">Каталог</a>
+    <a href="cart.html">Кошик</a>
+    <a href="sizes.html">Розміри</a>
+</nav>
+
+<div class="container">
+    <div class="sizes-header">
+        <h2>📏 Розмірна сітка</h2>
+        <p>Параметри вказані в сантиметрах. Оберіть категорію, щоб побачити деталі.</p>
+    </div>
+
+    <div class="select-wrapper">
+        <select id="type" onchange="showTable()">
+            <option value="">— Оберіть категорію —</option>
+            <option value="women">💃 Жіночий одяг</option>
+            <option value="men">🕺 Чоловічий одяг</option>
+            <option value="kids">👶 Дитячий одяг</option>
+        </select>
+    </div>
+
+    <div id="tableBox" class="table-container">
+        <div class="placeholder-text">Будь ласка, оберіть категорію вище, щоб переглянути розміри</div>
+    </div>
+</div>
+
+<script>
+function showTable(){
+    let type = document.getElementById("type").value;
+    let box = document.getElementById("tableBox");
+
+    if(type === "women"){
+        box.innerHTML = `
+        <table class="fade-in">
+            <thead>
+                <tr>
+                    <th>Розмір</th>
+                    <th>Груди (см)</th>
+                    <th>Талія (см)</th>
+                    <th>Стегна (см)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>XS</td><td>80-84</td><td>60-64</td><td>86-90</td></tr>
+                <tr><td>S</td><td>84-88</td><td>64-68</td><td>90-94</td></tr>
+                <tr><td>M</td><td>88-92</td><td>68-72</td><td>94-98</td></tr>
+                <tr><td>L</td><td>92-96</td><td>72-76</td><td>98-102</td></tr>
+            </tbody>
+        </table>`;
+    }
+    else if(type === "men"){
+        box.innerHTML = `
+        <table class="fade-in">
+            <thead>
+                <tr>
+                    <th>Розмір</th>
+                    <th>Груди (см)</th>
+                    <th>Талія (см)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>S</td><td>88-92</td><td>76-80</td></tr>
+                <tr><td>M</td><td>92-96</td><td>80-84</td></tr>
+                <tr><td>L</td><td>96-100</td><td>84-88</td></tr>
+                <tr><td>XL</td><td>100-104</td><td>88-92</td></tr>
+            </tbody>
+        </table>`;
+    }
+    else if(type === "kids"){
+        box.innerHTML = `
+        <table class="fade-in">
+            <thead>
+                <tr>
+                    <th>Розмір</th>
+                    <th>Зріст (см)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>XS</td><td>98-104</td></tr>
+                <tr><td>S</td><td>110-116</td></tr>
+                <tr><td>M</td><td>122-128</td></tr>
+                <tr><td>L</td><td>134-140</td></tr>
+            </tbody>
+        </table>`;
+    }
+    else {
+        box.innerHTML = '<div class="placeholder-text">Будь ласка, оберіть категорію вище, щоб переглянути розміри</div>';
+    }
+}
+</script>
+
+</body>
+</html>

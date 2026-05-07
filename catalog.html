@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Каталог - Fashion Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>FASHION STORE</h1>
+</header>
+
+<nav class="menu">
+    <a href="index.html">Головна</a>
+    <a href="catalog.html">Каталог</a>
+    <a href="cart.html">Кошик</a>
+    <a href="sizes.html">Розміри</a>
+</nav>
+
+<div class="slider">
+    <div class="slides">
+        <img src="IMG_7178.jpeg">
+        <img src="IMG_7176.jpeg">
+        <img src="IMG_7179.jpeg">
+
+        <img src="IMG_7178.jpeg">
+        <img src="IMG_7176.jpeg">
+        <img src="IMG_7179.jpeg">
+    </div>
+</div>
+
+<div class="container">
+    <h2>Каталог одягу</h2>
+
+    <div class="filters">
+        <input type="text" id="search" placeholder="Пошук товару..." onkeyup="filterProducts()">
+
+        <select id="category" onchange="filterProducts()">
+            <option value="">Всі категорії</option>
+            <option value="women">Жіночий</option>
+            <option value="men">Чоловічий</option>
+            <option value="kids">Дитячий</option>
+        </select>
+
+        <input type="number" id="minPrice" placeholder="Мін. ціна" onkeyup="filterProducts()">
+        <input type="number" id="maxPrice" placeholder="Макс. ціна" onkeyup="filterProducts()">
+
+        <button onclick="resetFilters()">Скинути фільтри</button>
+    </div>
+
+    <div id="loading" class="loading">Завантаження товарів...</div>
+    <div id="error" class="error"></div>
+    <div id="no-results" class="no-results" style="display:none;">Товарів не знайдено за заданими фільтрами.</div>
+
+    <div id="products" class="products"></div>
+</div>
+
+<footer>
+    <p>&copy; 2026 Fashion Store.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

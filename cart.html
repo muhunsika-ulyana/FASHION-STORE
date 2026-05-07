@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Кошик - Fashion Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>FASHION STORE</header>
+
+<nav class="menu">
+    <a href="index.html">Головна</a>
+    <a href="catalog.html">Каталог</a>
+    <a href="cart.html">Кошик</a>
+    <a href="sizes.html">Розміри</a>
+</nav>
+
+<div class="container">
+    <h2>🛒 Ваш кошик</h2>
+    <div id="cart"></div>
+    <div id="total"></div>
+    <button id="clearCartBtn">Очистити кошик</button>
+
+    <hr>
+
+    <div id="formBlock">
+        <h2>🚚 Оформлення замовлення</h2>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div>
+                <label>Ім'я</label>
+                <input type="text" id="name" placeholder="Ваше ім'я">
+                <div id="nameError" class="error"></div>
+            </div>
+            <div>
+                <label>Телефон</label>
+                <input type="text" id="phone" placeholder="+380...">
+                <div id="phoneError" class="error"></div>
+            </div>
+        </div>
+
+        <label>Адреса доставки</label>
+        <input type="text" id="address" placeholder="Вулиця, будинок, квартира">
+        <div id="addressError" class="error"></div>
+
+        <label>Місто</label>
+        <select id="city">
+            <option value="">— Оберіть місто —</option>
+            <option>Львів</option>
+            <option>Київ</option>
+            <option>Одеса</option>
+            <option>Дніпро</option>
+            <option>Рівне</option>
+        </select>
+        <div id="cityError" class="error"></div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 10px;">
+            <div class="radio-box">
+                <p style="color:#ff1493; font-weight:bold; margin-bottom: 10px;">Доставка:</p>
+                <label style="font-weight:normal;"><input type="radio" name="delivery" value="Нова Пошта" checked> Нова Пошта</label>
+                <label style="font-weight:normal;"><input type="radio" name="delivery" value="Укрпошта"> Укрпошта</label>
+            </div>
+            <div class="radio-box">
+                <p style="color:#ff1493; font-weight:bold; margin-bottom: 10px;">Оплата:</p>
+                <label style="font-weight:normal;"><input type="radio" name="pay" value="Картка" checked> Картка</label>
+                <label style="font-weight:normal;"><input type="radio" name="pay" value="Готівка"> Готівка</label>
+            </div>
+        </div>
+
+        <label style="background: #fff0f5; padding: 15px; border-radius: 10px; margin-top: 15px; display: flex; align-items: center; gap: 10px;">
+            <input type="checkbox" id="gift" style="width: 18px; height: 18px;"> Додати подарункову упаковку 🎁 (+50 грн)
+        </label>
+
+        <button id="submitBtn" style="width: 100%; margin-top: 30px; font-size: 20px;">Підтвердити замовлення</button>
+    </div>
+
+    <div id="result"></div>
+
+    <hr>
+    <h2>⭐ Відгуки наших клієнтів</h2>
+    <div class="review">⭐️⭐️⭐️⭐️⭐️ Дуже класний магазин! Все підійшло ідеально.— Андрій</div>
+    <div class="review">⭐️⭐️⭐️⭐️⭐️ Найкраща якість одягу, яку я замовляла онлайн! — Христина</div>
+    <div class="review">⭐️⭐️⭐️⭐️⭐️ Вау! Сукня просто вогонь, дякую за швидку доставку! 🔥 — Ірина</div>  
+    <div class="review">⭐️⭐️⭐️⭐️ Дуже гарна упаковка, навіть не довелося самій нічого оформлювати на подарунок. — Катя</div>
+    <div class="review">⭐️⭐️⭐️⭐️⭐️ Тканина дуже приємна до тіла, шви всі рівненькі. Найкраща якість! 🌸 — Юлія</div>
+    <div class="review">⭐️⭐️⭐️⭐️⭐️ Замовляю тут вже втретє, і як завжди все на вищому рівні. Дякую! — Остап</div>
+    <div class="review">⭐️⭐️⭐️⭐️ Колір в реальності такий же ніжний та насичений, як і на фото в каталозі. — Олена</div>
+    <div class="review">⭐️⭐️⭐️⭐️⭐️ Найкращий магазин для тих, хто любить стиль та комфорт. Рекомендую всім! — Світлана</div>
+</div>
+
+<script src="form.js"></script>
+
+</body>
+</html>
