@@ -37,6 +37,13 @@ body.sizes-page::before {
     opacity: 1;
 }
 
+/* ЗАСТАВКА ДЛЯ 5-Ї СТОРІНКИ (ВІДГУКИ) */
+body.reviews-page::before {
+    background: url("reviews-bg.jpg") no-repeat center center/cover; /* Вкажи свою назву фото тут */
+    filter: brightness(0.7);
+    opacity: 0.8;
+}
+
 header {
     background: rgba(255, 192, 203, 0.9);
     text-align: center;
@@ -213,6 +220,89 @@ tr:hover td {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- П'ЯТА СТОРІНКА (ВІДГУКИ - REVIEWS-PAGE) --- */
+#reviews-page {
+    padding: 20px;
+    font-family: sans-serif;
+}
+
+.add-review-form {
+    max-width: 500px;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 15px;
+    border: 1px solid #eee;
+}
+
+.input-field, .textarea-field {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.textarea-field {
+    height: 100px;
+    resize: vertical;
+}
+
+.rating-area {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+
+.rating-area input {
+    display: none;
+}
+
+.rating-area label {
+    font-size: 35px;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.rating-area label:before {
+    content: '★';
+}
+
+.rating-area input:checked ~ label,
+.rating-area label:hover,
+.rating-area label:hover ~ label {
+    color: #ffcc00;
+}
+
+.submit-btn {
+    background: #000;
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.submit-btn:hover {
+    background: #333;
+}
+
+/* Стилі для списку відгуків на 5-й сторінці */
+#reviews-page .review {
+    padding: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    line-height: 1.6;
+    color: #444;
+}
+
+#reviews-page .review:last-child {
+    border-bottom: none;
 }
 
 /* СПІЛЬНІ ЕЛЕМЕНТИ ФОРМ */

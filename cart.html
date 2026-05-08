@@ -77,17 +77,48 @@
 
     <div id="result"></div>
 
-    <hr>
-    <h2>⭐ Відгуки наших клієнтів</h2>
-    <div class="review">⭐️⭐️⭐️⭐️⭐️ Дуже класний магазин! Все підійшло ідеально.— Андрій</div>
-    <div class="review">⭐️⭐️⭐️⭐️⭐️ Найкраща якість одягу, яку я замовляла онлайн! — Христина</div>
-    <div class="review">⭐️⭐️⭐️⭐️⭐️ Вау! Сукня просто вогонь, дякую за швидку доставку! 🔥 — Ірина</div>  
-    <div class="review">⭐️⭐️⭐️⭐️ Дуже гарна упаковка, навіть не довелося самій нічого оформлювати на подарунок. — Катя</div>
-    <div class="review">⭐️⭐️⭐️⭐️⭐️ Тканина дуже приємна до тіла, шви всі рівненькі. Найкраща якість! 🌸 — Юлія</div>
-    <div class="review">⭐️⭐️⭐️⭐️⭐️ Замовляю тут вже втретє, і як завжди все на вищому рівні. Дякую! — Остап</div>
-    <div class="review">⭐️⭐️⭐️⭐️ Колір в реальності такий же ніжний та насичений, як і на фото в каталозі. — Олена</div>
-    <div class="review">⭐️⭐️⭐️⭐️⭐️ Найкращий магазин для тих, хто любить стиль та комфорт. Рекомендую всім! — Світлана</div>
-</div>
+<h2>⭐ Відгуки наших клієнтів</h2>
+
+            <div class="add-review-form">
+                <h3>Залишити свій відгук</h3>
+                <!-- Додали ID для імені -->
+                <input type="text" id="reviewer-name" placeholder="Ваше ім'я" class="input-field">
+                
+                <div class="rating-area">
+                    <input type="radio" id="star-5" name="rating" value="5">
+                    <label for="star-5" title="Оцінка «5»"></label>	
+                    <input type="radio" id="star-4" name="rating" value="4">
+                    <label for="star-4" title="Оцінка «4»"></label>    
+                    <input type="radio" id="star-3" name="rating" value="3">
+                    <label for="star-3" title="Оцінка «3»"></label>  
+                    <input type="radio" id="star-2" name="rating" value="2">
+                    <label for="star-2" title="Оцінка «2»"></label>    
+                    <input type="radio" id="star-1" name="rating" value="1">
+                    <label for="star-1" title="Оцінка «1»"></label>
+                </div>
+
+                <!-- Додали ID для тексту -->
+                <textarea id="review-text" placeholder="Ваш відгук..." class="textarea-field"></textarea>
+                <!-- Додали виклик функції JS -->
+                <button type="button" class="submit-btn" onclick="addNewReview()">Надіслати відгук</button>
+            </div>
+
+            <hr>
+
+            <!-- Контейнер куди будуть додаватися відгуки -->
+            <div id="reviews-container">
+                <div class="review">⭐️⭐️⭐️⭐️⭐️ Дуже класний магазин! Все підійшло ідеально. — Андрій</div>
+                <div class="review">⭐️⭐️⭐️⭐️⭐️ Найкраща якість одягу, яку я замовляла онлайн! — Христина</div>
+                <div class="review">⭐️⭐️⭐️⭐️⭐️ Вау! Сукня просто вогонь! 🔥 — Ірина</div>  
+                <div class="review">⭐️⭐️⭐️⭐️ Дуже гарна упаковка. — Катя</div>
+                <div class="review">⭐️⭐️⭐️⭐️⭐️ Тканина дуже приємна до тіла. 🌸 — Юлія</div>
+                <div class="review">⭐️⭐️⭐️⭐️⭐️ Замовляю тут вже втретє! — Остап</div>
+                <div class="review">⭐️⭐️⭐️⭐️ Колір такий же, як на фото. — Олена</div>
+                <div class="review">⭐️⭐️⭐️⭐️⭐️ Рекомендую всім! — Світлана</div>
+            </div>
+        </div>
+    </div>
+
 
 <script src="form.js"></script>
 

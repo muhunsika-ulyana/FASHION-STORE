@@ -158,3 +158,38 @@ document.getElementById("submitBtn").onclick = async function() {
 
 // Запускаємо відображення при завантаженні сторінки
 renderCart();
+
+function addNewReview() {
+    // 1. Отримуємо дані з полів
+    const name = document.getElementById('reviewer-name').value;
+    const text = document.getElementById('review-text').value;
+    const container = document.getElementById('reviews-container');
+    
+    // Знаходимо вибрану зірочку
+    const ratingInput = document.querySelector('input[name="rating"]:checked');
+    
+    // 2. Перевірка чи все заповнено
+    if (name === "" || text === "" || !ratingInput) {
+        alert("Будь ласка, вкажіть ім'я, відгук та поставте оцінку!");
+        return;
+    }
+
+    const ratingValue = ratingInput.value;
+    const stars = "⭐".repeat(ratingValue); // Малюємо потрібну кількість зірок
+
+    // 3. Створюємо новий елемент відгуку
+    const newReview = document.createElement('div');
+    newReview.className = 'review';
+    newReview.style.animation = "fadeIn 0.5s ease-in-out"; // Додаємо ефект появи
+    newReview.innerHTML = `${stars} ${text} — ${name}`;
+
+    // 4. Додаємо на початок списку
+    container.insertBefore(newReview, container.firstChild);
+
+    // 5. Очищуємо форму після відправки
+    document.getElementById('reviewer-name').value = "";
+    document.getElementById('review-text').value = "";
+    ratingInput.checked = false;
+
+    alert("Дякуємо! Ваш відгук опубліковано.");
+}
