@@ -1,9 +1,7 @@
 // form.js
 
-// Твоє посилання на MockAPI
+// 1. Конфігурація та ініціалізація
 const API_URL = "https://69fb46d888a7af0ecca8e6f9.mockapi.io/orders/orders";
-
-// 1. Отримуємо дані з кошика (LocalStorage)
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 const cartDiv = document.getElementById("cart");
@@ -11,7 +9,24 @@ const totalDiv = document.getElementById("total");
 const formBlock = document.getElementById("formBlock");
 const resultDiv = document.getElementById("result");
 
-// 2. Функція відображення товарів у кошику
+// Поля вводу для налаштування обмежень
+const nameInput = document.getElementById("name");
+const phoneInput = document.getElementById("phone");
+
+// --- ОБМЕЖЕННЯ ВВОДУ "НА ЛЬОТУ" ---
+
+// Дозволяємо лише літери в імені (укр, англ, пробіли)
+nameInput.oninput = function() {
+    this.value = this.value.replace(/[0-9!@#$%^&*()_+=\[\]{};':"\\|,.<>\/?]/g, '');
+};
+
+// Дозволяємо лише цифри в телефоні
+phoneInput.oninput = function() {
+    this.value = this.value.replace(/[^0-9]/g, '');
+};
+
+// --- ОСНОВНА ЛОГІКА КОШИКА ---
+
 function renderCart() {
     cartDiv.innerHTML = "";
     let total = 0;
@@ -19,11 +34,11 @@ function renderCart() {
     if (cart.length === 0) {
         cartDiv.innerHTML = "<p style='text-align:center; color:#888; padding:20px;'>Твій кошик порожній 🌸</p>";
         totalDiv.innerHTML = "";
-        formBlock.style.display = "none"; // Ховаємо форму, якщо кошик порожній
+        formBlock.style.display = "none";
         return;
     }
 
-    formBlock.style.display = "block"; // Показуємо форму
+    formBlock.style.display = "block";
 
     cart.forEach((item, index) => {
         total += item.price;
@@ -41,14 +56,12 @@ function renderCart() {
     totalDiv.innerHTML = `Разом до сплати: ${total} грн`;
 }
 
-// 3. Видалення товару
 window.removeItem = function(index) {
     cart.splice(index, 1);
     localStorage.setItem("cart", JSON.stringify(cart));
     renderCart();
 };
 
-// 4. Очищення всього кошика
 document.getElementById("clearCartBtn").onclick = () => {
     if(confirm("Очистити весь кошик?")) {
         cart = [];
@@ -57,33 +70,32 @@ document.getElementById("clearCartBtn").onclick = () => {
     }
 };
 
-// 5. Обробка натискання кнопки "Підтвердити замовлення"
+// --- ВІДПРАВКА ЗАМОВЛЕННЯ ---
+
 document.getElementById("submitBtn").onclick = async function() {
-    // Очищаємо старі помилки
     document.querySelectorAll('.error').forEach(el => el.innerText = "");
 
-    // Зчитуємо дані з усіх полів
-    const name = document.getElementById("name").value.trim();
-    const phone = document.getElementById("phone").value.trim();
+    const name = nameInput.value.trim();
+    const phone = phoneInput.value.trim();
     const address = document.getElementById("address").value.trim();
     const city = document.getElementById("city").value;
     
-    // Зчитуємо радіокнопки (Доставка та Оплата)
-    const delivery = document.querySelector('input[name="delivery"]:checked').value;
-    const payment = document.querySelector('input[name="pay"]:checked').value;
-    
-    // Зчитуємо чекбокс (Подарунок)
+    const deliveryEl = document.querySelector('input[name="delivery"]:checked');
+    const paymentEl = document.querySelector('input[name="pay"]:checked');
     const isGift = document.getElementById("gift").checked;
 
-    // Валідація (перевірка на порожні поля)
     let hasError = false;
 
-    if (name.length < 2) {
-        document.getElementById("nameError").innerText = "Введіть коректне ім'я";
+    // Регулярний вираз для перевірки, що в імені немає цифр і воно не порожнє
+    const nameRegex = /^[a-zA-Zа-яА-ЯіІїЇєЄґҐ\s]+$/;
+
+    if (!nameRegex.test(name) || name.length < 2) {
+        document.getElementById("nameError").innerText = "Ім'я має містити лише літери (мін. 2)";
         hasError = true;
     }
+    // Перевірка телефону (має бути рівно 10-12 цифр, без літер)
     if (phone.length < 10) {
-        document.getElementById("phoneError").innerText = "Введіть номер телефону";
+        document.getElementById("phoneError").innerText = "Введіть коректний номер (мінімум 10 цифр)";
         hasError = true;
     }
     if (!address) {
@@ -91,31 +103,32 @@ document.getElementById("submitBtn").onclick = async function() {
         hasError = true;
     }
     if (!city) {
-        document.getElementById("cityError").innerText = "Оберіть місто зі списку";
+        document.getElementById("cityError").innerText = "Оберіть місто";
+        hasError = true;
+    }
+    if (!deliveryEl || !paymentEl) {
+        alert("Оберіть спосіб доставки та оплати");
         hasError = true;
     }
 
-    if (hasError) return; // Зупиняємо, якщо є помилки
+    if (hasError) return;
 
-    // Розрахунок фінальної суми (додаємо 50 грн, якщо обрано упаковку)
     let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
     let finalPrice = isGift ? subtotal + 50 : subtotal;
 
-    // Створюємо об'єкт замовлення
     const orderData = {
         customerName: name,
         customerPhone: phone,
         customerAddress: address,
         customerCity: city,
-        deliveryMethod: delivery,
-        paymentMethod: payment,
+        deliveryMethod: deliveryEl.value,
+        paymentMethod: paymentEl.value,
         giftWrap: isGift,
         items: cart,
         totalAmount: finalPrice,
         date: new Date().toLocaleString()
     };
 
-    // Блокуємо кнопку під час відправки
     this.disabled = true;
     this.innerText = "Відправляємо...";
 
@@ -129,7 +142,6 @@ document.getElementById("submitBtn").onclick = async function() {
         if (response.ok) {
             const result = await response.json();
             
-            // Показуємо успішне повідомлення
             formBlock.style.display = "none";
             cartDiv.style.display = "none";
             totalDiv.style.display = "none";
@@ -138,58 +150,54 @@ document.getElementById("submitBtn").onclick = async function() {
             resultDiv.innerHTML = `
                 <div style="text-align:center; padding:30px; background:#eaffea; border:2px solid #2ecc71; border-radius:15px; margin-top:20px;">
                     <h2 style="color:#27ae60; border:none;">✨ Замовлення №${result.id} прийнято!</h2>
-                    <p style="font-size:18px;">Дякуємо, <b>${name}</b>! Ми зателефонуємо вам найближчим часом.</p>
+                    <p style="font-size:18px;">Дякуємо, <b>${name}</b>! Ми зателефонуємо вам за номером <b>${phone}</b>.</p>
                     <p style="margin-top:10px;">Сума до сплати: <b>${finalPrice} грн</b></p>
-                    <button onclick="window.location.href='index.html'" style="margin-top:20px;">На головну</button>
+                    <button onclick="window.location.href='index.html'" style="margin-top:20px; padding:10px 20px; cursor:pointer;">На головну</button>
                 </div>
             `;
 
-            // Очищаємо кошик після успіху
             localStorage.removeItem("cart");
         } else {
             throw new Error("Помилка сервера");
         }
     } catch (error) {
-        alert("Сталася помилка при відправці. Спробуйте ще раз!");
+        alert("Сталася помилка. Спробуйте ще раз!");
         this.disabled = false;
         this.innerText = "Підтвердити замовлення";
     }
 };
 
-// Запускаємо відображення при завантаженні сторінки
-renderCart();
+// --- ВІДГУКИ ---
 
-function addNewReview() {
-    // 1. Отримуємо дані з полів
-    const name = document.getElementById('reviewer-name').value;
-    const text = document.getElementById('review-text').value;
+window.addNewReview = function() {
+    const rNameInput = document.getElementById('reviewer-name');
+    const rTextInput = document.getElementById('review-text');
     const container = document.getElementById('reviews-container');
-    
-    // Знаходимо вибрану зірочку
     const ratingInput = document.querySelector('input[name="rating"]:checked');
     
-    // 2. Перевірка чи все заповнено
-    if (name === "" || text === "" || !ratingInput) {
-        alert("Будь ласка, вкажіть ім'я, відгук та поставте оцінку!");
+    // Валідація імені у відгуку (лише літери)
+    const nameValue = rNameInput.value.trim();
+    const nameRegex = /^[a-zA-Zа-яА-ЯіІїЇєЄґҐ\s]+$/;
+
+    if (!nameRegex.test(nameValue) || rTextInput.value.trim() === "" || !ratingInput) {
+        alert("Заповніть ім'я (тільки літери), текст та оберіть оцінку!");
         return;
     }
 
-    const ratingValue = ratingInput.value;
-    const stars = "⭐".repeat(ratingValue); // Малюємо потрібну кількість зірок
-
-    // 3. Створюємо новий елемент відгуку
+    const stars = "⭐".repeat(ratingInput.value);
     const newReview = document.createElement('div');
     newReview.className = 'review';
-    newReview.style.animation = "fadeIn 0.5s ease-in-out"; // Додаємо ефект появи
-    newReview.innerHTML = `${stars} ${text} — ${name}`;
+    newReview.style.animation = "fadeIn 0.5s ease-in-out";
+    newReview.innerHTML = `<b>${stars}</b> ${rTextInput.value} — <i>${nameValue}</i>`;
 
-    // 4. Додаємо на початок списку
     container.insertBefore(newReview, container.firstChild);
 
-    // 5. Очищуємо форму після відправки
-    document.getElementById('reviewer-name').value = "";
-    document.getElementById('review-text').value = "";
+    rNameInput.value = "";
+    rTextInput.value = "";
     ratingInput.checked = false;
 
-    alert("Дякуємо! Ваш відгук опубліковано.");
-}
+    alert("Дякуємо за відгук!");
+};
+
+// Старт
+renderCart();
